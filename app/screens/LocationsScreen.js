@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, StyleSheet, FlatList, View, ScrollView, SafeAreaView, Text } from "react-native";
+import { TouchableOpacity, StyleSheet, FlatList, View, ScrollView, SafeAreaView, Text, ImageBackground } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Screen from "../components/shared/Screen";
 import Card from "../components/shared/Card";
@@ -66,22 +66,29 @@ const LocationsScreen = ({ navigation }) => {
             </TouchableOpacity> */}
             <View style={styles.root}>
                 <SafeAreaView >
+                    <View style={styles.kk}  >
+                        <ImageBackground source={require("../assets/logo.png")} resizeMode="cover" style={styles.image}>
+                            <SearchbarScreen
+                                style={styles.text}
+                                searchPhrase={searchPhrase}
+                                setSearchPhrase={setSearchPhrase}
+                                clicked={clicked}
+                                setClicked={setClicked}
+                            />
+                        </ImageBackground>
+                    </View>
 
-                    <SearchbarScreen
-                        searchPhrase={searchPhrase}
-                        setSearchPhrase={setSearchPhrase}
-                        clicked={clicked}
-                        setClicked={setClicked}
-                    />
+
                     {(
 
                         <ListSearchScreen
                             searchPhrase={searchPhrase}
                             setClicked={setClicked}
                             data={courses}
-
+                            navigation={navigation}
 
                         />
+
 
                     )}
                 </SafeAreaView>
@@ -156,6 +163,34 @@ export default LocationsScreen;
 
 const styles = StyleSheet.create({
 
+    kk:
+    {
+        flexDirection: "row",
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100,
+    },
+    image: {
+
+
+        // justifyContent: "center",
+        // textAlign: 'center',
+        width: '100%',
+        height: 140,
+
+
+    },
+    text: {
+        // marginRight: 80,
+        justifyContent: "center",
+        width: '100%'
+        // color: "white",
+        // fontSize: 42,
+        // lineHeight: 84,
+        // fontWeight: "bold",
+        // textAlign: "center",
+        // backgroundColor: "#000000c0"
+    },
     root: {
         justifyContent: "center",
         alignItems: "center",

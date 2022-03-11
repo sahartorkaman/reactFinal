@@ -10,6 +10,7 @@ import {
     FlatList,
     SafeAreaView,
     TouchableOpacity,
+    ScrollView,
 } from "react-native";
 import Card from "../components/shared/Card";
 
@@ -22,7 +23,11 @@ const Item = ({ name, details }) => (
 );
 
 // the filter
-const LisrSearchScreen = ({ searchPhrase, setCLicked, data }) => {
+const LisrSearchScreen = ({ searchPhrase, setCLicked, data, navigation }) => {
+
+    const filteredCourses = data.filter((course) =>
+        course.title.includes(searchPhrase) || course.info.includes(searchPhrase)
+    );
     // const renderItem = ({ item }) => {
     //     // when no input, show all
     //     if (searchPhrase === "") {
@@ -47,31 +52,33 @@ const LisrSearchScreen = ({ searchPhrase, setCLicked, data }) => {
                 }}
             >
                 {searchPhrase ? (
-                    <FlatList
-                        data={data}
-                        // renderItem={renderItem}
-                        keyExtractor={(item) => item._id.toString()}
-                        renderItem={({ item }) => (
-                            <TouchableOpacity
-                                onPress={() =>
-                                    navigation.navigate("LocationDetailsScreen", {
-                                        course: item,
-                                    })
-                                }
-                            >
-                                <Card
-                                    title={item.title}
-                                    time="15:00:00"
-                                    price={item.price}
-                                    image={item.imageUrl}
-                                    teacher=""
-                                    info={item.info}
-                                    stylee="0"
+                    <ScrollView>
+                        <FlatList
+                            data={filteredCourses}
+                            // renderItem={renderItem}
+                            keyExtractor={(item) => item._id.toString()}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    onPress={() =>
+                                        navigation.navigate("LocationDetailsScreen", {
+                                            course: item,
+                                        })
+                                    }
+                                >
+                                    <Card
+                                        title={item.title}
+                                        time="15:00:00"
+                                        price={item.price}
+                                        image={item.imageUrl}
+                                        teacher=""
+                                        info={item.info}
+                                        stylee="0"
 
-                                />
-                            </TouchableOpacity>
-                        )}
-                    />
+                                    />
+                                </TouchableOpacity>
+                            )}
+                        />
+                    </ScrollView>
                 ) : null}
 
             </View>

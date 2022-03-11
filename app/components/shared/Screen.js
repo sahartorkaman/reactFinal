@@ -1,9 +1,9 @@
 import React from "react";
 import Constans from "expo-constants";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 
 const Screen = ({ children, style }) => {
-    return <View style={[styles.screen, style]}>{children}</View>;
+    return <View style={[styles.screen, style]}>{children}</View>
 };
 
 export default Screen;

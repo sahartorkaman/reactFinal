@@ -48,17 +48,17 @@ const TopTabNavigator = () => {
                 <TopTab.Screen
                     name="AllLocations"
                     component={LocationsScreen}
-                    options={{ tabBarLabel: "همه مکان ها" }}
+                    options={{ tabBarLabel: "همه دوره ها" }}
                 />
                 <TopTab.Screen
                     name="NewLocations"
                     component={NewLocationsScreen}
-                    options={{ tabBarLabel: "مکان های جدید" }}
+                    options={{ tabBarLabel: "دوره های جدید" }}
                 />
                 <TopTab.Screen
                     name="TopLocations"
                     component={TopLocationsScreen}
-                    options={{ tabBarLabel: "مکان های محبوب" }}
+                    options={{ tabBarLabel: "دوره های محبوب" }}
                 />
             </TopTab.Navigator>
         </Screen>

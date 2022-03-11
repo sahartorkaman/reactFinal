@@ -74,23 +74,19 @@ const AccountScreen = ({ navigation }) => {
         <Screen style={styles.screen}>
             <View style={styles.container}>
                 <TouchableOpacity onPress={pickImage}>
-
-
-
                     {getImage ? (
                         <Image
                             source={{ uri: getImage }}
                             style={styles.image}
                         />
                     ) :
-                        (<Image
-                            style={styles.image}
-                            source={require("../assets/favicon.png")}
-                        />)
+                        (
+                            <Image
+                                style={styles.image}
+                                source={require("../assets/favicon.png")}
+                            />
+                        )
                     }
-
-
-
                 </TouchableOpacity>
                 <View style={styles.details}>
                     <CustomText fontFamily="ih" size="2">

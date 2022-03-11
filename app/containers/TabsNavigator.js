@@ -50,7 +50,7 @@ const TabNavigator = () => {
                 name="locations"
                 component={TopTabNavigator}
                 options={{
-                    tabBarLabel: "مکان ها",
+                    tabBarLabel: "دوره ها",
                 }}
             />
 

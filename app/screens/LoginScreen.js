@@ -1,16 +1,23 @@
-import React, { useEffect } from "react";
-import { View, StyleSheet, Image } from "react-native";
+
+
+
+import React from "react";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Formik } from "formik";
 import * as Yup from "yup";
+import Constants from "expo-constants";
+import CustomButton from "./../components/shared/CustomButton";
+import ErrorMessage from "./../components/forms/ErrorMessage";
+import CustomTextInput from "./../components/shared/CustomTextInput";
 import Screen from "./../components/shared/Screen";
 import { customToast, loadingToast, successToast } from "./../utils/toasts";
-import {
-    CustomForm,
-    CustomFormField,
-    SubmitButton,
-} from "../components/forms";
+
 import { loginUser } from "../api/users";
 import Toast from "react-native-tiny-toast";
+import { StackActions } from "@react-navigation/native";
+import Icon from "../components/shared/Icon";
 
+//! DRY -> Don't Repeat Yourself
 const validationSchema = Yup.object().shape({
     email: Yup.string()
         .required("این فیلد الزامی می باشد")
@@ -20,13 +27,8 @@ const validationSchema = Yup.object().shape({
         .min(4, "کلمه عبور نباید کمتر از 4 کاراکتر باشد"),
 });
 
-const LoginScreen = ({ navigation, route }) => {
-    console.log(route);
-    // useEffect(() => {
-    //     if (route.params.successRegister)
-    //         successToast("ثبت نام موفقیت آمیز بود");
-    // }, []);
 
+const LoginScreen = ({ navigation, route }) => {
     const handleUserLogin = async (user) => {
         try {
             loadingToast("در حال برقراری ارتباط ...");
@@ -34,7 +36,7 @@ const LoginScreen = ({ navigation, route }) => {
             if (status === 200) {
                 Toast.hide();
                 successToast("ورود موفقیت آمیز بود");
-                //  navigation.navigate("Home");
+
                 navigation.reset({
                     index: 0,
                     routes: [{ name: "Home" }],
@@ -48,41 +50,74 @@ const LoginScreen = ({ navigation, route }) => {
             console.log(err);
         }
     };
-
     return (
         <Screen style={styles.container}>
-            <Image style={styles.logo} source={require("../assets/logo.png")} />
-            <CustomForm
+            <View style={styles.kk}>
+
+
+                <Image style={styles.logo} resizeMode="cover" source={require("../assets/logo.png")} />
+
+
+                <TouchableOpacity style={{ marginLeft: 5, marginTop: 40 }} onPress={() =>
+
+                    navigation.dispatch(StackActions.replace("Home"))
+                }  >
+
+                    <Icon name="home" backgroundColor="lightblue" style={{ marginBottom: 60 }} />
+                </TouchableOpacity>
+            </View>
+
+            <Formik
                 initialValues={{ email: "", password: "" }}
-                // onSubmit={() => navigation.navigate("Home")}
-                onSubmit={(user) => {
-                    handleUserLogin(user);
-                }}
+                onSubmit={(values) => handleUserLogin(values)}
                 validationSchema={validationSchema}
             >
-                <CustomFormField
-                    placeholder="ایمیل کاربری"
-                    autoCompleteType="email"
-                    autoCorrect={false}
-                    keyboardType="email-address"
-                    icon="email"
-                    name="email"
-                    placeholderTextColor="royalblue"
-                />
-                <CustomFormField
-                    placeholder="کلمه عبور"
-                    autoCompleteType="password"
-                    keyboardType='numeric'
-                    autoCorrect={false}
-                    icon="onepassword"
-                    name="password"
-                    placeholderTextColor="royalblue"
-                    secureTextEntry
-                />
-                <View style={{ width: "60%" }}>
-                    <SubmitButton title="ورود کاربر" />
-                </View>
-            </CustomForm>
+                {({
+                    handleChange,
+                    handleSubmit,
+                    errors,
+                    setFieldTouched,
+                    touched,
+                }) => (
+                    <>
+                        <CustomTextInput
+                            placeholder="ایمیل کاربری"
+                            autoCompleteType="email"
+                            autoCorrect={false}
+                            keyboardType="email-address"
+                            icon="email"
+                            placeholderTextColor="royalblue"
+                            onChangeText={handleChange("email")}
+                            onBlur={() => setFieldTouched("email")}
+                        />
+                        <ErrorMessage
+                            error={errors.email}
+                            visible={touched.email}
+                        />
+                        <CustomTextInput
+                            placeholder="کلمه عبور"
+                            autoCompleteType="password"
+                            autoCorrect={false}
+                            icon="onepassword"
+                            placeholderTextColor="royalblue"
+                            secureTextEntry
+                            onChangeText={handleChange("password")}
+                            onBlur={() => setFieldTouched("password")}
+                        />
+                        <ErrorMessage
+                            error={errors.password}
+                            visible={touched.password}
+                        />
+                        <View style={{ width: "60%" }}>
+                            <CustomButton
+                                title="ورود کاربر"
+                                onPress={handleSubmit}
+                            />
+                        </View>
+                    </>
+                )}
+            </Formik>
+
         </Screen>
     );
 };
@@ -90,13 +125,30 @@ const LoginScreen = ({ navigation, route }) => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+    kk: {
+        flexDirection: 'row',
+        justifyContent: "flex-end",
+        paddingLeft: 10,
+        marginLeft: 10,
+        marginTop: 10,
+        marginBottom: 10
+
+    },
     container: {
         alignItems: "center",
+
     },
     logo: {
-        width: 270,
-        height: 200,
+        width: 300,
+        height: 150,
         marginTop: 20,
-        marginBottom: 40,
+        // marginBottom: 10,
+        borderRadius: 120,
+
     },
+    icon: {
+        marginLeft: 10,
+        alignSelf: "center",
+    }
 });
+

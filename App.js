@@ -33,10 +33,12 @@ const App = () => {
             <AnimatedSplash
                 translucent={true}
                 isLoaded={loading}
-                logoImage={require("./app/assets/logo.png")}
-                backgroundColor={"#262626"}
+                logoImage={require("./app/assets/logoo.png")}
+
+                backgroundColor={"lightgrey"}
                 logoHeight={250}
                 logoWidth={250}
+                style={{ borderRadius: 90 }}
             >
                 <View style={{ flex: 1, direction: 'rtl' }}>
 

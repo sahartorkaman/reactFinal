@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Keyboard, Button } from "react-native";
+import { StyleSheet, View, Keyboard, Button } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 import { RFPercentage } from "react-native-responsive-fontsize";
-
+import DismissKeyboard from "../components/shared/DismissKeyboard"
+import { TextInput } from 'react-native-gesture-handler';
 const SearchbarScreen = ({ clicked, searchPhrase, setSearchPhrase, setClicked }) => {
     return (
         <View style={styles.container}>
@@ -15,21 +16,23 @@ const SearchbarScreen = ({ clicked, searchPhrase, setSearchPhrase, setClicked })
             >
 
                 {/* Input field */}
+                {/* <DismissKeyboard > */}
                 <TextInput
                     style={styles.input}
-                    placeholder=".....کجا می خوای بری"
+                    placeholder="چه دوره ای می خوای...."
                     value={searchPhrase}
                     onChangeText={setSearchPhrase}
                     onFocus={() => {
                         setClicked(true);
                     }}
                 />
+                {/* </DismissKeyboard> */}
                 {/* search Icon */}
                 <Feather
                     name="search"
                     size={20}
                     color="black"
-                    style={{ marginLeft: 1 }}
+                    style={{ marginLeft: 10 }}
                 />
                 {/* cross Icon, depending on whether the search bar is clicked or not */}
                 {/* {clicked && (
@@ -72,19 +75,20 @@ const styles = StyleSheet.create({
 
     // },
     container: {
-        backgroundColor: "lightgray",
+        backgroundColor: "#c0c5e9",
         borderRadius: 20,
         flexDirection: "row",
-        width: "90%",
+        width: "100%",
         padding: 15,
         marginVertical: 10,
+        alignItems: 'center',
 
     },
     searchBar__unclicked: {
         padding: 15,
         flexDirection: "row",
         width: "95%",
-        backgroundColor: "#d9dbda",
+        backgroundColor: "#c0c5e9",
         borderRadius: 15,
         alignItems: "center",
 
@@ -92,18 +96,18 @@ const styles = StyleSheet.create({
     searchBar__clicked: {
         padding: 15,
         flexDirection: "row",
-        width: "80%",
-        backgroundColor: "#d9dbda",
+        width: "95%",
+        backgroundColor: "#c0c5e9",
         borderRadius: 15,
         alignItems: "center",
         justifyContent: "space-evenly",
     },
     input: {
-        fontSize: RFPercentage(2),
+        fontSize: RFPercentage(2.5),
         fontFamily: "yekan",
         backgroundColor: 'white',
         marginLeft: 10,
-        width: "90%",
+        width: "100%",
         borderColor: 'white',
         textAlign: "center"
     }
