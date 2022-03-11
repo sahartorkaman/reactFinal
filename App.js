@@ -47,8 +47,9 @@ const App = () => {
                         </Provider>
 
                     </NavigationContainer>
-               </AnimatedSplash> 
-            </View>
+                </View>
+            </AnimatedSplash>
+
         );
     } else {
         return (
