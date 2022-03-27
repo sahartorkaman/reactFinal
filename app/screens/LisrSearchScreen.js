@@ -13,6 +13,7 @@ import {
     ScrollView,
 } from "react-native";
 import Card from "../components/shared/Card";
+import CardH from "../components/shared/CardH";
 
 // definition of the Item, which will be rendered in the FlatList
 const Item = ({ name, details }) => (
@@ -52,8 +53,10 @@ const LisrSearchScreen = ({ searchPhrase, setCLicked, data, navigation }) => {
                 }}
             >
                 {searchPhrase ? (
-                    <ScrollView>
+                    <ScrollView horizontal  >
                         <FlatList
+                            horizontal={true}
+                            scrollEnabled={false}
                             data={filteredCourses}
                             // renderItem={renderItem}
                             keyExtractor={(item) => item._id.toString()}
@@ -65,7 +68,7 @@ const LisrSearchScreen = ({ searchPhrase, setCLicked, data, navigation }) => {
                                         })
                                     }
                                 >
-                                    <Card
+                                    <CardH
                                         title={item.title}
                                         time="15:00:00"
                                         price={item.price}

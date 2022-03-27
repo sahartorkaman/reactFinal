@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, StyleSheet, FlatList, View, ScrollView, SafeAreaView, Text, ImageBackground } from "react-native";
+import { TouchableOpacity, StyleSheet, FlatList, View, ScrollView, SafeAreaView, Text, ImageBackground, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Screen from "../components/shared/Screen";
 import Card from "../components/shared/Card";
@@ -13,6 +13,8 @@ import DrawerNavigator from "../containers/DrawerNavigator";
 import { SearchBar } from "react-native-screens";
 import SearchbarScreen from "./SearchbarScreen";
 import ListSearchScreen from "./LisrSearchScreen";
+import { RFPercentage } from "react-native-responsive-fontsize";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 const LocationsScreen = ({ navigation }) => {
     const [searchPhrase, setSearchPhrase] = useState("");
     const [clicked, setClicked] = useState(false);
@@ -27,20 +29,49 @@ const LocationsScreen = ({ navigation }) => {
         };
         myFunc();
 
-        const getData = async () => {
-            const apiResponse = await fetch(
-                "https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages"
-            );
-            const data = await apiResponse.json();
-            setFakeData(data);
-        };
-        getData();
+
 
     }, []);
 
+
+
+    const ItemDivider = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: "100%",
+                    backgroundColor: "#607D8B",
+                }}
+            />
+        );
+    }
+
+
+    const FlatList_Header = () => {
+        return (
+            <View style={{
+                height: 25,
+                width: "100%",
+                backgroundColor: "#00B8D4",
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 10, backgroundColor: '#868dbe',
+            }}>
+
+                <Text style={{ fontSize: RFPercentage(2.5), color: 'white', fontFamily: 'yekan' }}>لیست دوره ها  <MaterialCommunityIcons
+                    name="arrow-down-thick"
+                    size={RFPercentage(3)}
+                    color='white'
+                />  </Text>
+
+            </View>
+        );
+    }
+
     return (
         <Screen style={styles.container}>
-
+            <Image source={require("../assets/IauLogo.gif")} resizeMode="center" style={styles.IauLogo} />
             {/* <DrawerNavigator /> */}
 
 
@@ -67,15 +98,15 @@ const LocationsScreen = ({ navigation }) => {
             <View style={styles.root}>
                 <SafeAreaView >
                     <View style={styles.kk}  >
-                        <ImageBackground source={require("../assets/logo.png")} resizeMode="cover" style={styles.image}>
-                            <SearchbarScreen
-                                style={styles.text}
-                                searchPhrase={searchPhrase}
-                                setSearchPhrase={setSearchPhrase}
-                                clicked={clicked}
-                                setClicked={setClicked}
-                            />
-                        </ImageBackground>
+                        {/* <ImageBackground source={require("../assets/logo.png")} resizeMode="cover" style={styles.image}> */}
+                        <SearchbarScreen
+                            style={styles.text}
+                            searchPhrase={searchPhrase}
+                            setSearchPhrase={setSearchPhrase}
+                            clicked={clicked}
+                            setClicked={setClicked}
+                        />
+                        {/* </ImageBackground> */}
                     </View>
 
 
@@ -96,8 +127,15 @@ const LocationsScreen = ({ navigation }) => {
 
             <ScrollView >
                 <View >
+                    <Text style={{ borderRadius: 10, backgroundColor: '#868dbe', color: 'white', textAlign: 'center', marginLeft: 10, marginBottom: 5, fontSize: RFPercentage(2.5), fontFamily: 'yekan' }}  >
 
+                        <MaterialCommunityIcons name="arrow-left-bold" size={RFPercentage(3)}
+                            color='white' />
+
+                        پیشنهاد ویژه</Text>
+                    {/* <ScrollView horizontal > */}
                     <FlatList
+                        scrollEnabled={true}
                         horizontal={true}
                         data={courses}
                         keyExtractor={(course) => course._id.toString()}
@@ -122,10 +160,15 @@ const LocationsScreen = ({ navigation }) => {
                             </TouchableOpacity>
                         )}
                     />
+                    {/* </ScrollView> */}
                 </View>
 
                 <View >
                     <FlatList
+
+                        ItemSeparatorComponent={ItemDivider}
+                        ListHeaderComponent={FlatList_Header}
+
                         horizontal={false}
                         data={courses}
                         keyExtractor={(course) => course._id.toString()}
@@ -162,7 +205,12 @@ const LocationsScreen = ({ navigation }) => {
 export default LocationsScreen;
 
 const styles = StyleSheet.create({
+    IauLogo: {
+        width: '100%',
+        height: 80,
 
+        marginBottom: 10
+    },
     kk:
     {
         flexDirection: "row",
@@ -176,20 +224,15 @@ const styles = StyleSheet.create({
         // justifyContent: "center",
         // textAlign: 'center',
         width: '100%',
-        height: 140,
+        height: 130,
 
 
     },
     text: {
-        // marginRight: 80,
+
         justifyContent: "center",
         width: '100%'
-        // color: "white",
-        // fontSize: 42,
-        // lineHeight: 84,
-        // fontWeight: "bold",
-        // textAlign: "center",
-        // backgroundColor: "#000000c0"
+
     },
     root: {
         justifyContent: "center",
@@ -203,7 +246,7 @@ const styles = StyleSheet.create({
         marginLeft: "10%",
     },
     container: {
-        padding: 20,
+        padding: 5,
         backgroundColor: "#f8f4f4",
     },
     style1: {

@@ -15,25 +15,25 @@ const CardH = ({ title, price, teacher, time, image, Info = null, stylee }) => {
                 }}
                 style={styles.courseImage}
             />
-            <View style={{ padding: 20 }}>
-                <CustomText fontFamily="yekan" size="2" styles={styles.title}>
+            <View style={{ padding: 10 }}>
+                <CustomText fontFamily="yekan" size="1.5" styles={styles.title}>
                     {title}
                 </CustomText>
                 <View style={styles.courseDetails}>
-                    <CustomText fontFamily="yekan" size="1.5">
+                    <CustomText fontFamily="yekan" size="1.0">
                         قیمت دوره :
                         {price === 0
                             ? " رایگان"
                             : ` ${numberWithCommas(price)} تومان`}
                     </CustomText>
-                    <CustomText fontFamily="yekan" size="1.5">
+                    <CustomText fontFamily="yekan" size="1.0">
                         زمان دوره : {time}
                     </CustomText>
                 </View>
                 <View style={styles.userContainer}>
                     <CustomText
                         fontFamily="ih"
-                        size="1.5"
+                        size="0.5"
                         styles={styles.teacher}
                     >
                         مدرس دوره : {teacher}
@@ -42,13 +42,13 @@ const CardH = ({ title, price, teacher, time, image, Info = null, stylee }) => {
             </View>
             {Info ? (
                 <View style={{ flex: 1 }}>
-                    <CustomText fontFamily="yekan" size="2.5">
+                    <CustomText fontFamily="yekan" size="2.0">
                         توضیحات دوره :
                     </CustomText>
                     <ScrollView>
                         <CustomText
                             fontFamily="ih"
-                            size="1.7"
+                            size="1.2"
                             styles={styles.courseInformation}
                         >
                             {Info}
@@ -67,12 +67,12 @@ const styles = StyleSheet.create({
 
     cardHorizontal: {
         marginTop: 5,
-        padding: 10,
+        padding: 5,
 
         //  backgroundColor: "teal",
 
         // color: "white",
-        marginHorizontal: 10,
+        marginHorizontal: 5,
         //  height: 300,
         color: "black",
         borderRadius: 15,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     },
     courseImage: {
         width: "100%",
-        height: 300,
+        height: 100,
     },
     courseDetails: {
         flexDirection: "row",

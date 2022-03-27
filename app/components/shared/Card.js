@@ -214,7 +214,8 @@ const Card = ({ title, price, teacher, time, image, Info = null, stylee = 1 }) =
                 source={{
                     uri: `https://rnapi.ghorbany.dev/${image}`,
                 }}
-                style={styles.courseImage}
+                //  style={styles.courseImage}
+                style={(stylee == 0) ? styles.courseImageH : styles.courseImage}
             />
             <View style={{ padding: 20 }}>
                 <CustomText fontFamily="yekan" size="2" styles={styles.title}>
@@ -268,11 +269,8 @@ const styles = StyleSheet.create({
         marginTop: 5,
         padding: 10,
 
-        //  backgroundColor: "teal",
-
-        // color: "white",
         marginHorizontal: 10,
-        //  height: 300,
+
         color: "black",
         borderRadius: 15,
         backgroundColor: "white",
@@ -291,6 +289,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: "100%",
         height: 200,
+    },
+    courseImageH:
+    {
+        textAlign: 'center',
+        marginTop: 10,
+        width: "100%",
+        height: 100,
     },
     courseDetails: {
         flexDirection: "row",

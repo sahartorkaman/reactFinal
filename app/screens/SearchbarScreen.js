@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
     },
     input: {
-        fontSize: RFPercentage(2.5),
+        fontSize: RFPercentage(2.0),
         fontFamily: "yekan",
         backgroundColor: 'white',
         marginLeft: 10,
