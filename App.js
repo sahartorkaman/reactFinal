@@ -5,15 +5,14 @@ import { NavigationContainer } from "@react-navigation/native";
 // import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import Apploading from "expo-app-loading";
-import StackNavigator from "./app/containers/StackNavigator";
 import { Provider } from 'react-redux';
 import { store } from './app/store/index';
 import AnimatedSplash from "react-native-animated-splash-screen";
 
 import DrawerNavigator from "./app/containers/DrawerNavigator";
 //* Support for RTL
-//I18nManager.allowRTL(true);
-//I18nManager.forceRTL(true);
+I18nManager.allowRTL(true);
+I18nManager.forceRTL(true);
 const getFonts = () =>
     Font.loadAsync({
         yekan: require("././app/assets/fonts/byekan.ttf"),
