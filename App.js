@@ -10,6 +10,7 @@ import { store } from './app/store/index';
 import AnimatedSplash from "react-native-animated-splash-screen";
 
 import DrawerNavigator from "./app/containers/DrawerNavigator";
+import StackNavigator from "./app/containers/StackNavigator";
 //* Support for RTL
 I18nManager.allowRTL(true);
 I18nManager.forceRTL(true);

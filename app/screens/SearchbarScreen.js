@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Keyboard, Button } from "react-native";
+import { StyleSheet, View, Keyboard, Button, TouchableWithoutFeedback, ScrollView } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import DismissKeyboard from "../components/shared/DismissKeyboard"
@@ -17,15 +17,21 @@ const SearchbarScreen = ({ clicked, searchPhrase, setSearchPhrase, setClicked })
 
                 {/* Input field */}
                 {/* <DismissKeyboard > */}
-                <TextInput
-                    style={styles.input}
-                    placeholder="چه دوره ای می خوای...."
-                    value={searchPhrase}
-                    onChangeText={setSearchPhrase}
-                    onFocus={() => {
-                        setClicked(true);
-                    }}
-                />
+
+                <ScrollView keyboardShouldPersistTaps='handled'>
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder="چه دوره ای می خوای...."
+                        value={searchPhrase}
+                        onChangeText={setSearchPhrase}
+                        onFocus={() => {
+                            setClicked(true);
+                        }}
+                    />
+
+                </ScrollView>
+
                 {/* </DismissKeyboard> */}
                 {/* search Icon */}
                 <Feather
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
     },
     input: {
-        fontSize: RFPercentage(2.0),
+        fontSize: RFPercentage(3.0),
         fontFamily: "yekan",
         backgroundColor: 'white',
         marginLeft: 10,
