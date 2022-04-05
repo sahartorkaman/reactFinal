@@ -13,17 +13,25 @@ import Icon from "../components/shared/Icon";
 import ItemSeparator from "./../components/shared/ItemSeparator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CustomText from "../components/shared/CustomText";
 import IconFontAwesom from "../components/shared/IconFontAwesom";
+import { userAction } from "../actions";
+import { clearUser } from "../api/users";
 const AccountScreen = ({ navigation }) => {
     const [getImage, setImage] = useState(null);
     const [getUser, setUser] = useState(null);
+    const dispatch = useDispatch();
+    dispatch(userAction());
     const user = useSelector(state => state.user);
     console.log(user);
     const handleLogout = async () => {
+
+
+
         await AsyncStorage.removeItem("token");
         await AsyncStorage.removeItem("userId");
+        dispatch(clearUser());
         //navigation.goBack();
         navigation.dispatch(StackActions.replace("Home"));
     };
@@ -36,7 +44,9 @@ const AccountScreen = ({ navigation }) => {
             if (use != null) {
                 setUser(use);
             }
+            console.log("ddd");
             console.log(getUser);
+
         }
         const LoadingImage = async () => {
             const image = await AsyncStorage.getItem("image");

@@ -1,4 +1,5 @@
 import { fetchLocations } from "../api/locations";
+import { loginUser } from "../api/users";
 
 export const getLocations = () => {
     return async (dispatch) => {
@@ -9,6 +10,7 @@ export const getLocations = () => {
 
 export const userAction = (user) => {
     return async (dispatch) => {
-        await dispatch({ type: "USER", payload: user });
+        const userInfo = await loginUser(user);
+        await dispatch({ type: "USER", payload: userInfo });
     };
 };
