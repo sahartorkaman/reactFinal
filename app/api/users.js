@@ -15,6 +15,13 @@ export const registerUser = async (user) => {
     }
 };
 
+
+export const clearUser = () => {
+    return async dispatch => {
+        await dispatch({ type: "CLEAR_USER", payload: {} });
+    };
+};
+
 export const loginUser = async (user) => {
     try {
         const { data, status } = await http.post(
@@ -30,3 +37,5 @@ export const loginUser = async (user) => {
         console.log(err);
     }
 };
+
+

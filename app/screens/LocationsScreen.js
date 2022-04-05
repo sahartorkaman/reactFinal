@@ -5,7 +5,7 @@ import Screen from "../components/shared/Screen";
 import Card from "../components/shared/Card";
 
 import { decodeToken } from "../utils/token";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Icon from "../components/shared/Icon";
 import ItemSeparator from "../components/shared/ItemSeparator";
 import CardH from "../components/shared/CardH";
@@ -15,6 +15,7 @@ import SearchbarScreen from "./SearchbarScreen";
 import ListSearchScreen from "./LisrSearchScreen";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { userAction } from "../actions";
 const LocationsScreen = ({ navigation }) => {
     const [searchPhrase, setSearchPhrase] = useState("");
     const [clicked, setClicked] = useState(false);
